@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="signupWrapper"><form method="post" action="" class="signupForm">
+        <h1>Create a <strong>SocialDev</strong> account</h1>
+        <div class="inputBox"><label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username..."></div>
+            <div class="inputBox"><label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password..."></div>
+                <div class="inputBox"><label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" placeholder="Re-enter your password..."></div>
+                <button class='submitButton'type="submit">Create Account</button>
+    </form></div>
+    <a href="/" style="text-decoration: none; color:white;"><h3>Return Home</h3></a>
+</body>
+<style>
+    * {
+        padding:0;
+        margin:0;
+        gap:0;
+        font-family: 'sans-serif';
+
+    }
+    body {
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        background-color:rgb(71, 71, 113);
+    }
+    .signupWrapper {
+        padding:2rem;
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        
+    }
+    .signupForm {
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        gap:1rem;
+    }
+    .inputBox {
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        gap:.3rem;
+    }
+    label {
+        color:white;
+        font-weight:800;
+    }
+    input {
+        padding:.5rem;
+        border-radius:10px;
+    }
+    .submitButton {
+        margin-top:.5rem;
+        padding:.5rem;
+    }
+    a {
+        list-style: none;
+        text-decoration: none;
+        color:rgb(0, 0, 0);
+        text-decoration:underline;
+        transition:300ms ease transform;
+        display:flex;
+
+    }
+    a:hover {
+        transform: scale(1.1);
+    }
+    h1 {
+        color:white;
+        
+    }
+</style>
+</html>

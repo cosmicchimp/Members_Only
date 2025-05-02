@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>Dev Social</header>
+    <div class="loginWrapper"><form method="post" action="" class="loginForm">
+        <div class="inputBox">        <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username..."></div>
+            <div class="inputBox">        <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password..."></div>
+                <button class='signinButton'type="submit">Log in</button>
+                <h3>Don't have an account? </h3><a href="/signup"><h3>Sign Up</h3></a>
+    </form></div>
+</body>
+<style>
+    * {
+        font-family: 'sans-serif';
+    }
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url("/assets/photo3.avif");  background-size: cover; /* or try 'contain' or fixed sizing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+    header {
+        padding:2rem;
+        background-color: rgba(0, 0, 0, 0.723);
+        width:100%;
+        text-align: center;
+        font-weight: 900;
+        font-size:2rem;
+        color:rgb(255, 255, 255);
+    }
+    .loginWrapper {
+        margin-top:2rem;
+        color:rgb(0, 0, 0);
+        background-color: rgba(255, 255, 255, 0.936);
+        border-radius:10px;
+        width:33%;
+        display:flex;
+  flex-direction:column;
+  align-items: center;
+  padding-top:2rem;
+  padding-bottom:2rem;
+    }
+    a {
+        list-style: none;
+        text-decoration: none;
+        color:rgb(0, 0, 0);
+        text-decoration:underline;
+        transition:300ms ease transform;
+        display:flex;
+
+    }
+    a:hover {
+        transform: scale(1.1);
+    }
+    .loginForm {
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        gap:.5rem;
+    }
+    .inputBox {
+        display:flex;
+  flex-direction:column;
+  gap:.3rem;
+    }
+    label {
+    font-weight: 800;
+}
+    #username, #password {
+        padding:.3rem;
+        border-radius:3px;
+    }
+    .signinButton {
+        padding:.5rem;
+        width:clamp(3rem, 4rem, 7rem);   
+        margin-top:1rem;
+    }
+</style>
+</html>
