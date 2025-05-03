@@ -12,3 +12,4 @@ router.post("/", async (req, res) => {
     catch (e) {console.log("Error in checkuser: ", e)}
    
 })
+module.exports = router
