@@ -1,6 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
-const env = require('env').process
+const dotenv = require("dotenv").config(); 
 const neon = require("@neondatabase/serverless");
 const sql = neon(process.env.DATABASE_URL)
 const router = express.Router()
