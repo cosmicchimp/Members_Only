@@ -3,6 +3,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const { neon } = require('@neondatabase/serverless'); // Correct
 const sql = neon({ connectionString: process.env.DATABASE_URL }); // Correct way to initialize Neon
+console.log(process.env.DATABASE_URL)
 const router = express.Router()
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
