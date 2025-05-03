@@ -2,7 +2,6 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const env = require('env').process
 const neon = require("@neondatabase/serverless");
-const dotenv = require("dotenv").config()
 const sql = neon(process.env.DATABASE_URL)
 const router = express.Router()
 router.use(express.urlencoded({ extended: true }));
@@ -19,3 +18,5 @@ router.post("/signupuser", async (req, res) => {
         res.status(500).send("error in creating user")
     }
 })
+
+module.exports = router
