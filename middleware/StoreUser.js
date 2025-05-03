@@ -7,10 +7,10 @@ const sql = neon(process.env.DATABASE_URL)
 const router = express.Router()
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
-router.post("https://devsocial.up.railway.app/signup", async (req, res) => {
+router.post("/signupuser", async (req, res) => {
     try {
         const {username, password} = req.body
-        const cryptedPass = bcrypt.hash(password, 10)
+        const cryptedPass = await bcrypt.hash(password, 10)
         await sql`INSERT INTO mo.users(username, password) VALUES (${username}, ${cryptedPass})`
         res.send("project created")
     }
