@@ -6,7 +6,7 @@ const sql = neon(process.env.DATABASE_URL)
 const router = express.Router()
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
-router.post("/signupuser", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const {username, password} = req.body
         const cryptedPass = await bcrypt.hash(password, 10)

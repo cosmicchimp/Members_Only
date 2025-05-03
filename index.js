@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.use(HomeRoute)
 app.use(SignupRoute)
-app.use(StoreUser)
+app.post("/signupuser", StoreUser);
 app.listen(4000, () => {
     console.log("Server running on local")
 })
