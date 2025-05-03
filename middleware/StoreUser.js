@@ -1,7 +1,7 @@
+const dotenv = require("dotenv").config();
 const express = require('express')
 const bcrypt = require('bcrypt')
-const dotenv = require("dotenv").config(); 
-const { neon } = require('@neondatabase/serverless'); // Correct importconst sql = neon(process.env.DATABASE_URL)
+const { neon } = require('@neondatabase/serverless'); // Correct
 const sql = neon({ connectionString: process.env.DATABASE_URL }); // Correct way to initialize Neon
 const router = express.Router()
 router.use(express.urlencoded({ extended: true }));
