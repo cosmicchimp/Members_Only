@@ -19,7 +19,7 @@ router.post("/signupuser", async (req, res) => {
         const { username, password } = req.body;
         const cryptedPass = await bcrypt.hash(password, 10);
         await sql`INSERT INTO users(username, password) VALUES (${username}, ${cryptedPass})`;
-        res.send("project created");
+        res.redirect("/");
     } catch (e) {
         console.log("Error in user sign up server side... StoreUser.js: ", e);
         res.status(500).send("error in creating user");
