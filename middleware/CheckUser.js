@@ -14,7 +14,7 @@ if (userData.length < 1) {
 }
 const passCheck = await bcrypt.compare(password, userData[0].password)
 if (passCheck) {
-    res.send({success: true})
+    res.redirect("/homepage")
 }
 else {
     res.send({success: false})
