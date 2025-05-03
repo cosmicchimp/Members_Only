@@ -7,9 +7,8 @@ const { neon } = require('@neondatabase/serverless');
 console.log("Connecting to Neon with:", process.env.DATABASE_URL);
 
 // Correct usage of neon
-const sql = neon({
-  connectionString: process.env.DATABASE_URL, // Correct connection string
-});
+const sql = neon(process.env.DATABASE_URL, // Correct connection string
+);
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
