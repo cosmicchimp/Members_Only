@@ -14,7 +14,7 @@ const router = express.Router();
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-router.post("/", async (req, res) => {
+router.post("/signupuser", async (req, res) => {
     try {
         const { username, password } = req.body;
         const cryptedPass = await bcrypt.hash(password, 10);
