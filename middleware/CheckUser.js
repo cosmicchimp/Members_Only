@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt")
 const {neon} = require("@neondatabase/serverless")
 const sql = neon(process.env.DATABASE_URL)
 const router = express.Router()
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 router.post("/", async (req, res) => {
     try { const {username, password} = res.body
     const userData = await sql`SELECT * FROM users WHERE username IN ${username}`
