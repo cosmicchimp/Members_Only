@@ -1,0 +1,12 @@
+const session = require('express-session');
+const passport = require('passport')
+const express = require('express')
+const LocalStrategy = require('passport-local').Strategy;
+const bodyParser = require('body-parser');
+const app = express.Router()
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+    secret: 'secretKey123',
+    resave: false,
+    saveUninitialized: false
+  }));

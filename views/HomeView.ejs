@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dev Social - Login</title>
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <body>
@@ -14,7 +14,7 @@
             <div class="inputBox">        <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter your password..."></div>
                 <button class='signinButton'type="submit">Log in</button>
-                <h3>Don't have an account? </h3><a href="/signup"><h3>Sign Up</h3></a>
+                <h3>Don't have an account? </h3><a href="/signup"><h3>Sign Up</h3></a><h3>Or</h3><a href="/guestentry"><h3>Continue as Guest</h3></a>
     </form></div>
 </body>
 <style>
@@ -38,7 +38,7 @@ body {
     header {
         padding:2rem;
         background-color: rgba(0, 0, 0, 0.723);
-        width:100%;
+        width:100vw;
         font-family: 'Bebas Neue', sans-serif;
         text-align: center;
         font-weight: 900;
@@ -56,6 +56,7 @@ body {
         align-items: center;
         padding-top:2rem;
         padding-bottom:2rem;
+        box-shadow:5px 5px 30px 1px black;
     }
     a {
         list-style: none;
@@ -74,6 +75,7 @@ body {
         flex-direction:column;
         align-items: center;
         gap:1rem;
+
     }
     .inputBox {
         display:flex;
@@ -92,5 +94,6 @@ body {
         width:clamp(3rem, 4rem, 7rem);   
         margin-top:1rem;
     }
+
 </style>
 </html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dev Social - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+      font-family: 'Bebas Neue', sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 3.3rem;
+      font-weight: 900;
+      background-color: rgba(0, 0, 0, 0.945);
+      color: white;
+      user-select:none;
+    }
+
+    .dashboardWrapper {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      gap: 0.5rem;
+      height: 100vh;
+    }
+
+    .leftColumn,
+    .rightColumn {
+      background-color: rgb(164, 164, 255);
+      border-radius: 0 10px 0 0;
+      padding: 1rem;
+      display:flex;
+      flex-direction: column;
+      align-content: center;
+      text-align:center;
+    }
+
+    .middleColumn {
+      background-color: white;
+      border-radius: 10px;
+      padding: 1rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      text-decoration: underline;
+      text-align: center;
+      margin-bottom: 1rem;
+      user-select:none;
+    }
+
+    .messageBoardHeader {
+      text-align: center;
+    }
+
+    .makePostButton {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: rgb(164, 164, 255);
+      border: 1px solid black;
+      border-radius: 10px;
+      color: black;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      margin-bottom:3rem;
+    }
+
+    .makePostButton:hover {
+      background-color: rgb(146, 146, 252);
+    }
+
+    .makePostButton:active {
+      transform: scale(0.95);
+    }
+
+    #messageModal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -125%);
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 300px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      text-align:center;
+    }
+    label {
+        user-select:none;
+    }
+    #messageModal.shown {
+      display: flex;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    label {
+      font-size: 1.2rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .messageBox {
+        color:white;
+        background-color:black;
+        width:clamp(10rem, 20rem, 25rem);
+        padding:1rem;
+        border-top-left-radius:10px;
+        border-top-right-radius:10px;
+        transition:transform 300ms ease-in;
+        display:flex;
+        flex-direction:column;
+        gap:1rem;
+    }
+
+    .messageTitle {
+        display:flex;
+        flex-direction:row;
+        justify-content: space-between;
+    }
+    .heart-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.1s ease-in;
+}
+
+.heart-button:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.heart-button .heart-icon {
+  width: clamp(1rem, 2rem, 3rem);
+  height: clamp(1rem, 2rem, 3rem);
+  fill: none;
+  transition: transform 0.1s ease-in, fill 0.2s ease;
+}
+
+.heart-button .heart-icon.filled {
+  fill: red;
+}
+
+.heart-button:hover .heart-icon {
+  transform: scale(1.15);
+}
+    .svg {
+        width: clamp(1rem, 2rem, 3rem);
+        height: clamp(1rem, 2rem, 3rem);
+    }
+    .buttonBox {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .replyBar {
+    background-color: rgba(41, 41, 41, 0.786);
+    margin-bottom: 2rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
+    padding: .5rem;
+    width: clamp(4rem, 7rem, 10rem);
+    transition: transform 200ms ease-in, transform-origin 200ms ease-in; /* Add transition for transform-origin */
+}
+
+.replyBar:hover {
+    transform-origin: top;  /* Keep it on the left side during hover */
+    transform: scaleY(1.08);
+}
+
+  </style>
+</head>
+<body>
+  <header>Dev Social</header>
+  <div class="dashboardWrapper">
+    <div class="leftColumn">
+      <h2>Friends</h2>
+    </div>
+
+    <div class="middleColumn">
+      <div id="messageModal">
+        <form method="POST" action="/pushmessage">
+          <label for="message">Create a message</label>
+          <textarea name="message" rows="6" cols="40" placeholder="Write your message..."></textarea>        <button class="submitButton" type="submit">Post</button><button type="reset" class="closeButton">Close</button></form>
+      </div>
+
+      <div class="messageBoardHeader">
+        <h2>Message Board</h2>
+      </div>
+
+      <button class="makePostButton">Create a post</button>
+      <% messages.forEach((message) => { %>
+        <div class="messageWrapper">
+        <div class="messageBox">
+            <% 
+            const mm = String(message.created_at.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const dd = String(message.created_at.getDate()).padStart(2, '0');
+            const yy = String(message.created_at.getFullYear()).slice(-2);
+            const formatted = `${mm}/${dd}/${yy}`;%>
+            <div class="messageTitle"><h3><%= message.poster_id%></h3><h3><%= formatted%></h3></div>
+            <p class="messageBody"><%= message.message_body%></p>
+            <div class="buttonBox">
+                <button class="heart-button">
+                  <svg viewBox="0 0 24 24" fill="none" class="heart-icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+                
+                <button class="heart-button">
+                  <svg viewBox="0 0 24 24" fill="none" class="svg">
+                    <path d="M20 17V15.8C20 14.1198 20 13.2798 19.673 12.638C19.3854 12.0735 18.9265 11.6146 18.362 11.327C17.7202 11 16.8802 11 15.2 11H4M4 11L8 7M4 11L8 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </div>
+              </div>
+              <div class="replyBar"><h3>See replies...</h3></div>
+            </div>
+     <% })%>
+    </div>
+
+    <div class="rightColumn">
+      <h2>Profile:</h2>
+      <h3>Logged in as <%= user.username%> </h3>
+    </div>
+  </div>
+
+  <script>
+    // Open modal functionality
+    const button = document.querySelector(".makePostButton");
+    const modal = document.querySelector("#messageModal");
+  
+    button.addEventListener("click", () => {
+      modal.classList.toggle("shown");
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+  
+      modal.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - modal.offsetLeft;
+        offsetY = e.clientY - modal.offsetTop;
+      });
+  
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          modal.style.left = e.clientX - offsetX + "px";
+          modal.style.top = e.clientY - offsetY + "px";
+        }
+      });
+  
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+  
+      const closeButton = document.querySelector(".closeButton");
+      closeButton.addEventListener('click', () => {
+        modal.classList = ("");
+      });
+    });
+  
+    // Heart toggle functionality (works for each heart individually)
+    document.querySelector(".middleColumn").addEventListener("click", (event) => {
+  // Check if the clicked element is a button containing a heart SVG
+  if (event.target.closest(".heart-button")) {
+    const heart = event.target.closest(".heart-button").querySelector(".heart-icon");
+    heart.classList.toggle("filled");
+  }
+});
+
+
+  </script>
+</body>
+</html>
