@@ -17,6 +17,7 @@ const GuestRoute = require("./routes/GuestRoute")
 const LogoutRoute = require("./routes/LogoutRoute")
 const DeleteMessage = require("./middleware/DeleteMessage")
 const app = express();
+const PORT = process.env.PORT || 4000;
 // Passport Config ////////////////////////////////////////////////////
 passport.use(new LocalStrategy( async (username, password, done) => {
   let data = await sql`SELECT * FROM users WHERE username = ${username}`
@@ -75,7 +76,7 @@ app.post('/login', passport.authenticate('local', {
   }));
 
 
-// // Start server
-// app.listen(4000, () => {
-//   console.log("Server running on http://localhost:4000");
-// });
+// Start server
+app.listen(PORT, () => {
+  console.log("Server running");
+});
