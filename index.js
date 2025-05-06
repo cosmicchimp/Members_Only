@@ -48,7 +48,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   rolling: true,
-  cookie: { secure: false, rolling:true, maxAge:1000 * 60 * 15}
+  cookie: { secure: true, rolling:true, maxAge:1000 * 60 * 15}
 }));
 
 app.use(passport.initialize());
@@ -75,7 +75,7 @@ app.post('/login', passport.authenticate('local', {
   }));
 
 
-// Start server
-app.listen(4000, () => {
-  console.log("Server running on http://localhost:4000");
-});
+// // Start server
+// app.listen(4000, () => {
+//   console.log("Server running on http://localhost:4000");
+// });
