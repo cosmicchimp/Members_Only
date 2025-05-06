@@ -16,6 +16,7 @@ const pushMessage = require("./middleware/pushMessage")
 const GuestRoute = require("./routes/GuestRoute")
 const LogoutRoute = require("./routes/LogoutRoute")
 const DeleteMessage = require("./middleware/DeleteMessage")
+app.set("trust proxy", 1); // This enables secure cookies behind a proxy
 const app = express();
 const PORT = process.env.PORT || 4000;
 // Passport Config ////////////////////////////////////////////////////
