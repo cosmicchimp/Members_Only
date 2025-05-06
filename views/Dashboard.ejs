@@ -183,15 +183,15 @@
 .heart-button:hover .heart-icon {
   transform: scale(1.15);
 }
-    .svg {
-        width: clamp(1rem, 2rem, 3rem);
-        height: clamp(1rem, 2rem, 3rem);
-    }
-    .buttonBox {
-        display:flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+.svg {
+  width: clamp(1rem, 2rem, 3rem);
+  height: clamp(1rem, 2rem, 3rem);
+  }
+.buttonBox {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  }
     .replyBar {
     background-color: rgba(41, 41, 41, 0.786);
     margin-bottom: 2rem;
@@ -206,9 +206,19 @@
 .replyBar:hover {
     transform-origin: top;  /* Keep it on the left side during hover */
     transform: scaleY(1.08);
-
 }
-
+a {
+  list-style: none;
+  text-decoration: none;
+  color:rgb(0, 0, 0);
+  text-decoration:underline;
+  transition:300ms ease transform;
+  display:flex;
+  align-self:center;
+  }
+    a:hover {
+        transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -238,7 +248,7 @@
             const dd = String(message.created_at.getDate()).padStart(2, '0');
             const yy = String(message.created_at.getFullYear()).slice(-2);
             const formatted = `${mm}/${dd}/${yy}`;%>
-            <div class="messageTitle"><h3><%= message.poster_id%></h3><h3><%= formatted%></h3></div>
+            <div class="messageTitle"><h3><%= user.username == "guest" ? "User Hidden":message.poster_id%></h3><h3><%= formatted%></h3></div>
             <p class="messageBody"><%= message.message_body%></p>
             <div class="buttonBox">
                 <button class="heart-button">
@@ -246,8 +256,12 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg>
                 </button>
-                
-                <button class="heart-button">
+
+                <% if (user.username === 'admin') { %>
+                  <form action="/deletemessage/<%= message.id%>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                  </form>
+                <% } %>                <button class="heart-button">
                   <svg viewBox="0 0 24 24" fill="none" class="svg">
                     <path d="M20 17V15.8C20 14.1198 20 13.2798 19.673 12.638C19.3854 12.0735 18.9265 11.6146 18.362 11.327C17.7202 11 16.8802 11 15.2 11H4M4 11L8 7M4 11L8 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg>
@@ -262,6 +276,7 @@
     <div class="rightColumn">
       <h2>Profile:</h2>
       <h3>Logged in as <%= user.username%> </h3>
+      <a href="/logout"><h3>Logout</h3></a>
     </div>
   </div>
 
@@ -288,7 +303,7 @@
           modal.style.top = e.clientY - offsetY + "px";
         }
       });
-  
+
       document.addEventListener("mouseup", () => {
         isDragging = false;
       });
@@ -307,8 +322,10 @@
     heart.classList.toggle("filled");
   }
 });
+  const deleteBtn = document.querySelector('.deleteBtn')
+  deleteBtn.addEventListener('click', () => {
 
-
+  })
   </script>
 </body>
 </html>

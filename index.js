@@ -14,7 +14,8 @@ const isAuthenticated = require("./middleware/isAuthenticated")
 const sql = neon(process.env.DATABASE_URL)
 const pushMessage = require("./middleware/pushMessage")
 const GuestRoute = require("./routes/GuestRoute")
-
+const LogoutRoute = require("./routes/LogoutRoute")
+const DeleteMessage = require("./middleware/DeleteMessage")
 const app = express();
 // Passport Config ////////////////////////////////////////////////////
 passport.use(new LocalStrategy( async (username, password, done) => {
@@ -62,9 +63,11 @@ app.use(HomeRoute);
 app.use(SignupRoute);
 app.use(Dashboard)
 app.use(GuestRoute)
+app.use(LogoutRoute)
 //Middlewares
 app.use(StoreUser);
 app.use(pushMessage)
+app.use(DeleteMessage)
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/', // Redirect on success
     failureRedirect: '/login', // Redirect on failure
